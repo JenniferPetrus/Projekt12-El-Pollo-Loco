@@ -1,25 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" translate="no">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Pollo Loco</title>
+    <link rel="icon" type="image/x-icon" href="img/4_enemie_boss_chicken/3_attack/G13.png">
     <link rel="stylesheet" href="style.css">
-    <script src="./models/movable-object.class.js"></script>
-    <script src="./models/character.class.js"></script>
-    <script src="./models/chicken.class.js"></script>
-    <script src="./models/cloud.class.js"></script>
-    <script src="./models/world.class.js"></script>
-    <script src="./models/background-object.class.js"></script>
-    <script src="./js/game.js"></script>
+    <title>El Pollo Loco</title>
+    <script src="models/drawable-object.class.js"></script>
+    <script src="models/movable-object.class.js"></script>
+    <script src="models/character.class.js"></script>
+    <script src="models/chicken.class.js"></script>
+    <script src="models/chicks.class.js"></script>
+    <script src="models/cloud.class.js"></script>
+    <script src="models/status-bar.class.js"></script>
+    <script src="models/status-coin.class.js"></script>
+    <script src="models/status-bottle.class.js"></script>
+    <script src="models/status-endboss.class.js"></script>
+    <script src="models/world.class.js"></script>
+    <script src="models/background-object.class.js"></script>
+    <script src="models/coin.class.js"></script>
+    <script src="models/bottle.class.js"></script>
+    <script src="models/keyboard.class.js"></script>
+    <script src="models/level.class.js"></script>
+    <script src="models/endboss.class.js"></script>
+    <script src="models/throwable-object.class.js"></script>
+    <script src="levels/level1.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/script.js"></script>
 </head>
-<body onload="init()">
-
-    <h1>El pollo loco</h1>
-
-    <canvas id="canvas" width="720" height="480">
-
-    </canvas>
-    
+<body onload="initBody()">
+    <div id="fullscreen">
+        <div id="mobile-keyboard" class="console left d-none">
+            <div class="mobile-btn">
+                <span class="hover console-btn" id="go-jump">></span>
+                <span class="hover console-btn" id="go-left">&lt;</span>
+            </div>
+        </div>
+        <div id="start" class="height responsive">
+            <section id="manage" class="d-none overlay responsive">
+                <section class="section section-manage">
+                    <p onclick="closeManager()" class="close center">X</p>
+                    <table>
+                        <tr>
+                            <th><img class="only-desktop" src="img/space.png"><img class="only-mobile jump"
+                                    src="img/forward.png"></th>
+                            <th>Jump</th>
+                        </tr>
+                        <tr>
+                            <td><img src="img/left.png"></td>
+                            <td>Left</td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td><img class="only-desktop" src="img/d.png"><img class="only-mobile throw"
+                                    src="img/forward.png">
+                            </td>
+                            <td>Throw</td>
+                        </tr>
+                        <tr>
+                            <th><img src="img/forward.png"></th>
+                            <th>Right</th>
+                        </tr>
+                    </table>
+                </section>
+            </section>
+            <section id="policy" class="d-none end overlay responsive">
+                <section class="section info">
+                    <p onclick="closePolicy()" class="close close-info center">X</p>
+                    <div class="impressum">
+                        <h2>Impressum</h2>
+                        <p>Angaben gemäß § 5 TMG</p>
+                        <p>Jennifer Petrus<br>
+                            E-Mail: jenny.petrus19@gmail.com <br>
+                        </p>
+                        <p> <strong>Vertreten durch: </strong><br></p>
+                        <p>Developer Akademie GmbH <br>
+                            Tassiloplatz 25 <br>
+                            81541 München<br>
+                        </p>
+                        <p><strong>Haftungsausschluss: </strong><br><br><strong>Haftung für Links</strong><br><br>
+                            Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen
+                            Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.
+                            Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der
+                            Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf
+                            mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung
+                            nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne
+                            konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von
+                            Rechtsverletzungen werden wir derartige Links umgehend
+                            entfernen.<br><br><strong>Urheberrecht</strong><br><br>
+                            Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem
+                            deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der
+                            Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung
+                            des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den
+                            privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht
+                            vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere
+                            werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine
+                            Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei
+                            Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.</p>
+                    </div>
+                </section>
+            </section>
+            <img class="startscreen responsive" src="img/9_intro_outro_screens/start/startscreen_1.png">
+            <button onclick="initGame()" class="play-btn">Play Game</button>
+        </div>
+        <div id="game-over" class="height width responsive pstn-rltv" style="display: none">
+            <img class="endscreen responsive" src="img/9_intro_outro_screens/win/win_2.png">
+            <img onclick="restart()" id="restart" class="end-btn" src="img/restart.png">
+            <img onclick="home()" id="home" class="end-btn" src="img/home.png">
+        </div>
+        <div id="you-lost" class="height width responsive pstn-rltv" style="display: none">
+            <img class="endscreen responsive" src="img/9_intro_outro_screens/game_over/you lost.png">
+            <img onclick="restart()" id="restart" class="end-btn" src="img/restart.png">
+            <img onclick="home()" id="home" class="end-btn" src="img/home.png">
+        </div>
+        <canvas id="canvas" class="height" style="display: none" width="720" height="480"></canvas>
+        <footer>
+            <div onclick="mute()" id="change-speaker" class="menu hover"></div>
+            <img onclick="manage()" id="gaming" class="menu hover" src="img/book.png">
+            <img onclick="policy()" id="gaming2" class="menu hover" src="img/info.png">
+            <img onclick="fullscreen()" id="open-fullscreen" src="img/fullscreen.png" class="fullscreen hover">
+            <img onclick="closefullscreen()" id="close-fullscreen" src="img/closescreen.png "
+                class="fullscreen hover d-none">
+        </footer>
+        <div id="mobile-keyboard" class="console right d-none">
+            <div class="mobile-btn">
+                <span class="hover console-btn" id="go-throw">></span>
+                <span class="hover console-btn" id="go-right">></span>
+            </div>
+        </div>
+    </div>
+    <div class="rotate">
+        <img src="img/rotate.png" class="rotate">
+        <p class="device">Turn your Device to play</p>
+    </div>
 </body>
 </html>
