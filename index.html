@@ -29,13 +29,6 @@
     <script src="js/script.js"></script>
 </head>
 <body onload="initBody()">
-    <div id="fullscreen">
-        <div id="mobile-keyboard" class="console left d-none">
-            <div class="mobile-btn">
-                <span class="hover console-btn" id="go-jump">></span>
-                <span class="hover console-btn" id="go-left">&lt;</span>
-            </div>
-        </div>
         <div id="start" class="height responsive">
             <section id="manage" class="d-none overlay responsive">
                 <section class="section section-manage">
@@ -53,8 +46,7 @@
                     </table>
                     <table>
                         <tr>
-                            <td><img class="only-desktop" src="img/d.png"><img class="only-mobile throw"
-                                    src="img/forward.png">
+                            <td><img class="only-desktop" src="img/d.png"><img class="only-mobile throw">
                             </td>
                             <td>Throw</td>
                         </tr>
@@ -106,8 +98,8 @@
         </div>
         <div id="game-over" class="height width responsive pstn-rltv" style="display: none">
             <img class="endscreen responsive" src="img/9_intro_outro_screens/win/win_2.png">
-            <img onclick="restart()" id="restart" class="end-btn" src="img/restart.png">
             <img onclick="home()" id="home" class="end-btn" src="img/home.png">
+            <img onclick="restart()" id="restart" class="end-btn" src="img/restart.png">
         </div>
         <div id="you-lost" class="height width responsive pstn-rltv" style="display: none">
             <img class="endscreen responsive" src="img/9_intro_outro_screens/game_over/you lost.png">
@@ -119,17 +111,19 @@
             <div onclick="mute()" id="change-speaker" class="menu hover"></div>
             <img onclick="manage()" id="gaming" class="menu hover" src="img/book.png">
             <img onclick="policy()" id="gaming2" class="menu hover" src="img/info.png">
-            <img onclick="fullscreen()" id="open-fullscreen" src="img/fullscreen.png" class="fullscreen hover">
-            <img onclick="closefullscreen()" id="close-fullscreen" src="img/closescreen.png "
-                class="fullscreen hover d-none">
         </footer>
-        <div id="mobile-keyboard" class="console right d-none">
+        <div id="mobile-keyboard" class="console left d-none">
             <div class="mobile-btn">
-                <span class="hover console-btn" id="go-throw">></span>
+                <span class="hover console-btn" id="go-left">&lt;</span>
                 <span class="hover console-btn" id="go-right">></span>
             </div>
         </div>
-    </div>
+        <div id="mobile-keyboard" class="console top right d-none">
+            <div class="mobile-btn btn-column">
+                <span class="console-btn" id="go-throw" tabindex="0"></span>
+                <span class="hover console-btn" id="go-jump">JUMP</span>
+            </div>
+        </div>
     <div class="rotate">
         <img src="img/rotate.png" class="rotate">
         <p class="device">Turn your Device to play</p>

@@ -75,8 +75,13 @@ function restart() {
     document.getElementById('game-over').style.display = "none";
     document.getElementById('you-lost').style.display = "none";
     initGame();
+    resetSpeakerImage();
 }
 
+function resetSpeakerImage() {
+    sound = false;
+    document.getElementById('change-speaker').style.backgroundImage = "url('img/audio.png')";
+}
 function home() {
     window.location.reload();
 }

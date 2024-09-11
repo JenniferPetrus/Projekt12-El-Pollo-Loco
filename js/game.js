@@ -6,7 +6,7 @@ music = new Audio('audio/bg-music.mp3');
 music.volume = 0.1;
 
 function initBody() {
-    music.pause(); 
+    music.play(); 
 }
 
 function mute() {
