@@ -77,7 +77,7 @@ class World {
     }
 
     characterJumpToKill(enemy) {
-        return this.character.isColliding(enemy) && this.character.isAbovGround();
+        return this.character.isColliding(enemy) && this.character.isAboveGround();
     }
 
     characterCollidingWithEnemies(enemy, endboss) {

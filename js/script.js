@@ -20,38 +20,6 @@ function closePolicy() {
     document.getElementById('policy').classList.remove('d-flex');
 }
 
-function fullscreen() {
-    let fullscreen = document.getElementById('fullscreen');
-    document.getElementById('open-fullscreen').classList.add('d-none');
-    document.getElementById('close-fullscreen').classList.remove('d-none');
-    enterFullscreen(fullscreen);
-}
-
-function closefullscreen() {
-    let fullscreen = document.getElementById('fullscreen');
-    document.getElementById('open-fullscreen').classList.remove('d-none');
-    document.getElementById('close-fullscreen').classList.add('d-none');
-    exitFullscreen(fullscreen);
-}
-
-function enterFullscreen(element) {
-    if (element.requestFullscreen) {
-        element.requestFullscreen();
-    } else if (element.msRequestFullscreen) {
-        element.msRequestFullscreen();
-    } else if (element.webkitRequestFullscreen) {
-        element.webkitRequestFullscreen();
-    }
-}
-
-function exitFullscreen() {
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-    }
-}
-
 function startGame() {
     document.getElementById('start').style.display = "none";
     document.getElementById('canvas').style.display = "block";

@@ -118,7 +118,7 @@ class Character extends MovableObject {
         this.snoring_sound.pause();
         this.otherDirection = false;
         this.lastMove = 0;
-        if (!sound && !this.isAbovGround()) {
+        if (!sound && !this.isAboveGround()) {
             this.walking_sound.play();
         }
     }
@@ -132,13 +132,13 @@ class Character extends MovableObject {
         this.snoring_sound.pause();
         this.otherDirection = true;
         this.lastMove = 0;
-        if (!sound && !this.isAbovGround()) {
+        if (!sound && !this.isAboveGround()) {
             this.walking_sound.play();
         }
     }
 
     canJump() {
-        return this.world.keyboard.SPACE && !this.isAbovGround();
+        return this.world.keyboard.SPACE && !this.isAboveGround();
     }
 
     jump() {
@@ -161,7 +161,7 @@ class Character extends MovableObject {
     }
 
     jumpCharacter() {
-        if (this.isAbovGround()) {
+        if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMPING);
         }
     }
