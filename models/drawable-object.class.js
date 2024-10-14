@@ -7,6 +7,7 @@ class DrawableObject {
     imageCache = {};
     currentImage = 0;
     
+    
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
@@ -22,6 +23,7 @@ class DrawableObject {
             img.src = path;
             this.imageCache[path] = img;
         });
+        
 
     }
 }

@@ -50,7 +50,9 @@ footer {
 }
 
 #go-jump {
-    font-size: 10px;
+    font-size: 18px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #go-throw {
@@ -260,7 +262,10 @@ h2 {
 .mobile-btn {
     display: flex;
     justify-content: space-around;
-    height: 100%;
+    height: 80px;
+    width: 100px;
+    border-radius: 10px;
+    background-color: #ffc265de;
 }
 
 .btn-column {
@@ -325,16 +330,16 @@ th{
 }
 
 .top {
-    top: 54vh;
+    top: 60vh;
     height: 10vh;
 }
 
 .left {
-    left: 30vw;
+    left: 10vw;
 }
 
 .right {
-    right: 30vw;
+    right: 10vw;
 }
 
 @media (max-width: 1024px) and (orientation: landscape) {

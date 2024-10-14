@@ -184,6 +184,7 @@ class World {
         this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.throwableObjects);
         this.ctx.translate(-this.camera_x, 0);
+        
 
         let self = this;
         requestAnimationFrame(function () {
@@ -203,6 +204,13 @@ class World {
         }
 
         mo.draw(this.ctx);
+
+        // this.ctx.beginPath();
+        // this.ctx.lineWidth = "6";
+        // this.ctx.strokeStyle = "red";
+        // this.ctx.rect(mo.x, mo.y, mo.width, mo.height);
+        // this.ctx.stroke();
+
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);
