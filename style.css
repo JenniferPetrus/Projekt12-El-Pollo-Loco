@@ -24,7 +24,12 @@ canvas {
     background-color: black;
     display: block;
 }
-
+#canvas {
+    width: 100vw;
+    height: 100vh;
+    display: block; /* Entfernt den Abstand unter dem Canvas */
+    background-color: black; /* Beispiel Hintergrundfarbe */
+}
 footer {
     position: relative;
     display: flex;
@@ -325,16 +330,16 @@ th{
 }
 
 .top {
-    top: 54%;
-    height: 80px;
+    top: 54vh;
+    height: 10vh;
 }
 
 .left {
-    left: 23%;
+    left: 30vw;
 }
 
 .right {
-    right: 23%;
+    right: 30vw;
 }
 
 @media (max-width: 1024px) and (orientation: landscape) {
@@ -350,7 +355,17 @@ th{
     .rotate {
         display: block;
     }
+    .startscreen {
+        display: none;
+    }
+    footer{
+        display: none;
+    }
+    #start{
+        display: none;
+    }
 }
+
 
 @media only screen and (max-height: 600px) {
     h1 {
@@ -392,5 +407,12 @@ th{
         img {
             width: 32px !important;
         }
+    }
+}
+
+
+@media (hover: none) and (orientation: landscape){
+    #mobile-keyboard {
+        display: flex;
     }
 }

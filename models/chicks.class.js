@@ -77,5 +77,4 @@ class Chicks extends MovableObject {
     chickIsWalking() {
         this.playAnimation(this.IMAGES_WALKING);
     }
-
 }
