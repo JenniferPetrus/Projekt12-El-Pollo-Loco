@@ -10,6 +10,10 @@ class Coinbar extends DrawableObject {
 
     percentage = 0;
 
+    /**
+     * Sets all start conditions for the object.
+     */
+
     constructor() {
         super();
         this.loadImages(this.IMAGES);
@@ -20,16 +24,28 @@ class Coinbar extends DrawableObject {
         this.setPercantage(0);
     }
 
+    /**
+     * Add 10 percent more to the Bar.
+     */
+
     collect() {
         this.percentage += 10;
     }
+
+    /**
+     * @param {number} percantage - Current percantage.
+     * Sets the current percentage value. 
+     */
 
     setPercantage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
-
     }
+
+    /**
+     * @returns Shows the matching image to the percentage.
+     */
 
     resolveImageIndex() {
         if (this.percentage == 100) {

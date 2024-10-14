@@ -5,9 +5,17 @@ sound = false;
 music = new Audio('audio/bg-music.mp3');
 music.volume = 0.1;
 
+/**
+ * Pauses the Backgroundmusic.
+ */
+
 function initBody() {
     music.play(); 
 }
+
+/**
+ * Switches the background music & sound.
+ */
 
 function mute() {
     if (!sound) {
@@ -20,6 +28,10 @@ function mute() {
         document.getElementById('change-speaker').style.backgroundImage = "url('img/audio.png')";
     }
 }
+
+/**
+ * Initializes the touch elements, the canvas & starts the Game.
+ */
 
 function initGame() {
     keyboard.touchBoardPress();

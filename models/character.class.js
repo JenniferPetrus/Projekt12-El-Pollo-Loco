@@ -77,6 +77,10 @@ class Character extends MovableObject {
     loosing_sound = new Audio('audio/game-over-sound.mp3');
     snoring_sound = new Audio('audio/snore.mp3');
 
+    /**
+     * Sets all start conditions for the object.
+     */
+
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png')
         this.loadImages(this.IMAGES_WALKING);
@@ -92,12 +96,20 @@ class Character extends MovableObject {
         this.playDead();
     }
 
+    /**
+     * Animates the Character.
+     */
+
     animate() {
         this.walking_sound.pause();
         setInterval(() => this.moveCharacter(), 1000 / 60);
         setInterval(() => this.playCharacter(), 50);
         setInterval(() => this.jumpCharacter(), 100);
     }
+
+    /**
+     * Moves the Character in the desired direction.
+     */
 
     moveCharacter() {
         if (this.canMoveRight())
@@ -109,9 +121,18 @@ class Character extends MovableObject {
         this.world.camera_x = -this.x + 100;
     }
 
+    /**
+     * 
+     * @returns when the right button is pressed.
+     */
+
     canMoveRight() {
         return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x;
     }
+
+    /**
+     * The Character moves right.
+     */
 
     moveRight() {
         super.moveRight();
@@ -123,9 +144,18 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * 
+     * @returns when the left button is pressed.
+     */
+
     canMoveLeft() {
         return this.world.keyboard.LEFT && this.x > 0;
     }
+
+    /**
+     * The Character moves left.
+     */
 
     moveLeft() {
         super.moveLeft();
@@ -137,9 +167,18 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * 
+     * @returns when the space button is pressed.
+     */
+
     canJump() {
         return this.world.keyboard.SPACE && !this.isAboveGround();
     }
+
+    /**
+     * The Character jumps.
+     */
 
     jump() {
         super.jump();
@@ -149,6 +188,10 @@ class Character extends MovableObject {
             this.jumping_sound.play();
         }
     }
+
+    /**
+     * Shows the animation.
+     */
 
     playCharacter() {
         if (this.isHurt()) {
@@ -160,11 +203,19 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     *  Shows the animation when character jump.
+     */
+
     jumpCharacter() {
         if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMPING);
         }
     }
+
+    /**
+     * Sets the time for beeing passive.
+     */
 
     passive() {
         setInterval(() => {
@@ -173,6 +224,10 @@ class Character extends MovableObject {
             }
         }, 1000);
     }
+
+    /**
+     * Plays the animation when the character is inactive.
+     */
 
     stand() {
         setInterval(() => {
@@ -188,6 +243,10 @@ class Character extends MovableObject {
             }
         }, 1000);
     }
+
+    /**
+     * Plays the animation when the character is dead and shows the lost Screen.
+     */
 
     playDead() {
         setInterval(() => {

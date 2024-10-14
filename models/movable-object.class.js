@@ -17,6 +17,12 @@ class MovableObject extends DrawableObject {
         right: 0,
     };
 
+    /**
+     * Controlls the gravity if the character jump.
+     * Decreasing speed above the ground and
+     * increasing speed to the ground.
+     */
+
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -26,6 +32,12 @@ class MovableObject extends DrawableObject {
         }, 1000 / 25);
     }
 
+    /**     
+     * @returns true or false.
+     * Checks the start position in y against the is position and
+     * ensures that thrown objects simply fall.
+     */
+
     isAboveGround() {
         if (this instanceof ThrowableObject) {
             return true
@@ -34,6 +46,12 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    /**
+     * @param {object} mo is the current enemy.
+     * @returns true or false.
+     * Check if somebody collided with another figure.
+     */
+
     isColliding(mo) {
         return (this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
             this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
@@ -41,13 +59,25 @@ class MovableObject extends DrawableObject {
             this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom)
     }
 
+    /**
+     * Character arriving endstation.
+     */
+
     arriveEndStation() {
         return this.x >= 1900;
     }
 
+    /**
+     * Collecting Bottle.
+     */
+
     collectBottle() {
         this.amountOfBottle += 1;
     }
+
+    /**
+     * Collecting Coin.
+     */
 
     collectCoin() {
         this.amountOfCoins += 10;
@@ -55,6 +85,10 @@ class MovableObject extends DrawableObject {
             this.amountOfCoins = 100;
         }
     }
+
+    /**
+     * When somebody hit.
+     */
 
     hit() {
         this.energy -= 10;
@@ -65,6 +99,10 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    /**
+     * When somebody injured.
+     */
+
     injured() {
         this.energy -= 20;
         if (this.energy < 0) {
@@ -74,9 +112,17 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    /**
+     * When somebody lost.
+     */
+
     lost() {
         return this.energy = 0;
     }
+
+    /**
+     * When somebody getting hurt.
+     */
 
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
@@ -84,9 +130,19 @@ class MovableObject extends DrawableObject {
         return timepassed < 1;
     }
 
+    /**
+     * When somebodys energy is zero.
+     */
+
     isDead() {
         return this.energy == 0;
     }
+
+    /**
+     * Loads different images in the img value,
+     * to animate the figures movements.
+     * @param {object} images - Current image from the figure.
+     */
 
     playAnimation(images) {
         let i = this.currentImage % images.length;
@@ -95,15 +151,26 @@ class MovableObject extends DrawableObject {
         this.currentImage++;
     }
 
+    /**
+     * When moving right.
+     */
+
     moveRight() {
         this.x += this.speed;
         this.otherDirection = false;
     }
 
+    /**
+     * When moving left.
+     */
+
     moveLeft() {
         this.x -= this.speed;
-
     }
+
+    /**
+     * When jumping.
+     */
 
     jump() {
         this.speedY = 30;

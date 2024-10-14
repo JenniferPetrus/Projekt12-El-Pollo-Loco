@@ -22,6 +22,10 @@ class Chicks extends MovableObject {
     deadSound = false;
     chick_sound = new Audio('audio/chick.mp3');
 
+    /**
+     * Sets all start conditions for the object.
+     */
+
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png')
         this.loadImages(this.IMAGES_WALKING);
@@ -31,6 +35,10 @@ class Chicks extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Animates the Chick.
+     */
+
     animate() {
         setInterval(() => {
             this.moveRight();
@@ -39,6 +47,10 @@ class Chicks extends MovableObject {
 
         setInterval(() => this.playChick(), 200);
     }
+
+    /**
+     * Plays the Chick.
+     */
 
     playChick() {
         if (this.isDead()) {
@@ -52,10 +64,18 @@ class Chicks extends MovableObject {
         }
     }
 
+    /**
+     * Plays that the Chick is dead.
+     */
+
     playDead() {
         this.playAnimation(this.IMAGES_DEAD);
         this.speed = 0;
     }
+
+    /**
+     * Delete the Chick from the Map.
+     */
 
     deleteFromMap() {
         setTimeout(() => {
@@ -63,9 +83,18 @@ class Chicks extends MovableObject {
         }, 250);
     }
 
+    /**
+     * 
+     * @returns checks if its dead to play the Sound.
+     */
+
     chickIsDead() {
         return !this.deadSound;
     }
+
+    /**
+     * Plays the dead Sound form the Chicken.
+     */
 
     playDeadSound() {
         if (!sound) {
@@ -74,6 +103,10 @@ class Chicks extends MovableObject {
         this.deadSound = true;
     }
 
+    /**
+     * Chicks walking.
+     */
+    
     chickIsWalking() {
         this.playAnimation(this.IMAGES_WALKING);
     }

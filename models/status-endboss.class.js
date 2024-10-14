@@ -10,6 +10,10 @@ class Enemiebar extends DrawableObject {
 
     percentage = 100;
 
+    /**
+     * This function set all start conditions for the object.
+     */
+
     constructor() {
         super();
         this.loadImages(this.IMAGES);
@@ -20,12 +24,20 @@ class Enemiebar extends DrawableObject {
         this.setPercantage(100);
     }
 
+    /**
+     * @param {number} percantage - Current percantage.
+     * Sets the current percentage value. 
+     */
+
     setPercantage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
-
     }
+
+    /**
+     * @returns Shows the matching image to the percentage.
+     */
 
     resolveImageIndex() {
         if (this.percentage == 100) {

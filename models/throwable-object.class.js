@@ -18,6 +18,14 @@ class ThrowableObject extends MovableObject {
     broken = false;
     hideAttack = false;
 
+    /**
+     * Constructor for ThrowableObject class.
+     * @param {number} x - is the start coordinate from the image.
+     * @param {number} y - is the start coordinate from the image.
+     * @param {boolean} otherDirection - Flag indicating the direction of the object.
+     * @param {number} world - Position where it starts.
+     */
+
     constructor(x, y, otherDirection, world) {
         super().loadImage('img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png');
         this.loadImages(this.IMAGES_THROW);
@@ -32,6 +40,10 @@ class ThrowableObject extends MovableObject {
         this.throw();
     }
 
+    /**
+     * Animates the Bottle.
+     */
+
     animate() {
         setInterval(() => {
             if (this.broken == true) {
@@ -45,12 +57,20 @@ class ThrowableObject extends MovableObject {
         }, 60);
     }
 
+    /**
+     * Speed of Bottle.
+     */
+
     throw() {
         this.speedY = 20;
         this.applyGravity();
 
         setInterval(() => this.moveBottle(), 25);
     }
+
+    /**
+     * Position and speed of Bottle.
+     */
 
     moveBottle() {
         if (this.y >= 370) {

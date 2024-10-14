@@ -17,6 +17,12 @@ class World {
     bottle_sound = new Audio('audio/bottle.mp3')
     boss_sound = new Audio('audio/bossChick.mp3');
 
+    /**
+     * Creates an instance of World.
+     * @param {HTMLCanvasElement} canvas - Canvas element.
+     * @param {Keyboard} keyboard - Keyboard controller.
+     */
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -26,9 +32,17 @@ class World {
         this.run();
     }
 
+    /**
+     * Set the World.
+     */
+
     setWorld() {
         this.character.world = this;
     }
+
+    /**
+     * Game loop.
+     */
 
     run() {
         setInterval(() => {
@@ -40,6 +54,10 @@ class World {
             this.bossFollowCharacter();
         }, 50);
     }
+
+    /**
+     * Checks if throwable objects are thrown.
+     */
 
     checkThrowObjects() {
         if (this.keyboard.D && this.character.amountOfBottle > 0 && !this.oneMoreShot) {
@@ -60,29 +78,49 @@ class World {
         }
     }
 
+    /**
+     * Checks collisions between character and enemies or endboss.
+     */
+
     checkCollisions() {
         this.level.enemies.forEach((enemy, i) => {
-            this.level.endboss.forEach(endboss => {
-                if (this.characterJumpToKill(enemy)) {
-                    enemy.lost();
-                } else
-                    if (this.characterCollidingWithEnemies(enemy, endboss)) {
-                        this.characterGetsHurt();
-                    }
+            if (this.characterJumpToKill(enemy)) {
+                enemy.lost();
                 if (enemy.isSplicable) {
                     this.level.enemies.splice(i, 1);
                 }
-            });
+            } else {
+                this.level.endboss.forEach(endboss => {
+                    if (this.characterCollidingWithEnemies(enemy, endboss)) {
+                        this.characterGetsHurt();
+                    }
+                });
+            }
         });
     }
+
+    /**
+     * @param {string} enemy - One of all enemies.
+     * @returns If character jumps to kill enemy.
+     */
 
     characterJumpToKill(enemy) {
         return this.character.isColliding(enemy) && this.character.isAboveGround();
     }
 
+    /**
+     * @param {string} enemy - One of all enemies.
+     * @param {string} endboss - the endboss.
+     * @returns If character is colliding with one of them.
+     */
+
     characterCollidingWithEnemies(enemy, endboss) {
         return this.character.isColliding(enemy) && enemy.energy > 0 || this.character.isColliding(endboss);
     }
+
+    /**
+     * When character gets hurt.
+     */
 
     characterGetsHurt() {
         this.character.hit();
@@ -92,6 +130,10 @@ class World {
         this.statusBar.setPercantage(this.character.energy);
     }
 
+    /**
+     * When character is arrives the Endstation.
+     */
+
     catchedByBoss() {
         this.level.endboss.forEach(endboss => {
             if (this.character.arriveEndStation()) {
@@ -99,6 +141,10 @@ class World {
             }
         });
     }
+
+    /**
+     * Character is attacking the endboss.
+     */
 
     attackEndboss() {
         this.throwableObjects.forEach(bottle => {
@@ -111,6 +157,10 @@ class World {
         });
     }
 
+    /**
+     * When endboss gets hurt.
+     */
+
     endbossGetsHurt(bottle, endboss) {
         bottle.broken = true;
         endboss.injured();
@@ -120,6 +170,10 @@ class World {
         this.enemieBar.setPercantage(endboss.energy)
     }
 
+    /**
+     * When endboss follows character to attack him.
+     */
+
     bossFollowCharacter() {
         let endboss = this.level.endboss[0]
         if (this.character.x > endboss.x + endboss.width) {
@@ -128,6 +182,10 @@ class World {
             endboss.otherDirection = false;
         }
     }
+
+    /**
+     * Character is attacking enemies.
+     */
 
     attackChickenWithBottle() {
         this.throwableObjects.forEach(bottle => {
@@ -139,6 +197,10 @@ class World {
             });
         });
     }
+
+    /**
+     * Character collecting Coins.
+     */
 
     collectingCoins() {
         this.level.coins.forEach((coin, i) => {
@@ -153,6 +215,10 @@ class World {
         });
     }
 
+    /**
+     * Character collecting Bottles.
+     */
+
     collectingBottles() {
         this.level.bottles.forEach((bottle, i) => {
             if (this.character.isColliding(bottle) && this.character.amountOfBottle < 10) {
@@ -165,6 +231,10 @@ class World {
             }
         });
     }
+
+    /**
+     * Draw the World.
+     */
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -192,11 +262,23 @@ class World {
         });
     }
 
+   /**
+    * 
+    * @param {string} objects - The array that add to the map.
+    * Add multiple objects to map.
+    */
+
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o);
         });
     }
+
+    /**
+     * 
+     * @param {string} mo - The object that add to the map.
+     * Add single object to map.
+     */
 
     addToMap(mo) {
         if (mo.otherDirection) {
@@ -205,11 +287,11 @@ class World {
 
         mo.draw(this.ctx);
 
-        this.ctx.beginPath();
-        this.ctx.lineWidth = "6";
-        this.ctx.strokeStyle = "red";
-        this.ctx.rect(mo.x, mo.y, mo.width, mo.height);
-        this.ctx.stroke();
+        // this.ctx.beginPath();
+        // this.ctx.lineWidth = "6";
+        // this.ctx.strokeStyle = "red";
+        // this.ctx.rect(mo.x, mo.y, mo.width, mo.height);
+        // this.ctx.stroke();
 
 
         if (mo.otherDirection) {
@@ -217,12 +299,22 @@ class World {
         }
     }
 
+    /**
+     * Flips the image horizontally.
+     * @param {Object} mo - The object whose image needs to be flipped.
+     */
+
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
         this.ctx.scale(-1, 1);
         mo.x = mo.x * -1
     }
+
+    /**
+     * Reverts the flipped image back to its original state.
+     * @param {Object} mo - The object whose image needs to be reverted.
+     */
 
     flipImageBack(mo) {
         this.ctx.restore();

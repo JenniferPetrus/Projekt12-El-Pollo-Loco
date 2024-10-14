@@ -9,6 +9,10 @@ class Statusbar extends DrawableObject {
     ];
 
     percentage = 100;
+    
+    /**
+     * Sets all start conditions for the object.
+     */
 
     constructor() {
         super();
@@ -20,12 +24,20 @@ class Statusbar extends DrawableObject {
         this.setPercantage(100);
     }
 
+    /**
+     * @param {number} percantage - Current percantage.
+     * Sets the current percentage value. 
+     */
+
     setPercantage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
-
     }
+
+    /**
+     * @returns Shows the matching image to the percentage.
+     */
 
     resolveImageIndex() {
         if (this.percentage == 100) {

@@ -49,6 +49,10 @@ class Endboss extends MovableObject {
 
     hadFirstContact = false;
 
+    /**
+     * Sets all start conditions for the object.
+     */
+
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0])
         this.loadImages(this.IMAGES_WALKING);
@@ -60,6 +64,10 @@ class Endboss extends MovableObject {
         this.speed = 0.35
         this.animate();
     }
+
+    /**
+     * Animates the Endboss.
+     */
 
     animate() {
         let i = 0;
@@ -79,6 +87,10 @@ class Endboss extends MovableObject {
         }, 300);
     }
 
+    /**
+     * Plays that the Endboss is dead.
+     */
+
     playDead() {
         this.playAnimation(this.IMAGES_DEAD);
         this.speed = 0;
@@ -87,9 +99,19 @@ class Endboss extends MovableObject {
         }, 1500);
     }
 
+    /**
+     * 
+     * @returns Plays that the Endboss is hurt.
+     */
+
     playHurt() {
         return this.playAnimation(this.IMAGES_HURT);
     }
+
+    /**
+     *  @param {number} i - Counter.
+     * Endboss start raising Alarm
+     */
 
     endbossRaiseAlarm(i) {
         if (i < 4) {
@@ -109,11 +131,21 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * @param {number} i - Counter.
+     * Endboss becomes more aggressive.
+     */
+
     endbossAggressive(i) {
         setInterval(() => {
             this.endbossRaiseAlarm(i);
         }, 1000);
     }
+
+    /**
+     * @param {number} i - Counter.
+     * Endboss goes wild.
+     */
 
     endbossGoesOnNuts(i) {
         setInterval(() => {
