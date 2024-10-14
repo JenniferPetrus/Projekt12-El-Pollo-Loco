@@ -24,12 +24,7 @@ canvas {
     background-color: black;
     display: block;
 }
-#canvas {
-    width: 100vw;
-    height: 100vh;
-    display: block; /* Entfernt den Abstand unter dem Canvas */
-    background-color: black; /* Beispiel Hintergrundfarbe */
-}
+
 footer {
     position: relative;
     display: flex;

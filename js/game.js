@@ -1,8 +1,8 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let sound = false;
-let music = new Audio('audio/bg-music.mp3');
+sound = false;
+music = new Audio('audio/bg-music.mp3');
 music.volume = 0.1;
 
 function initBody() {
@@ -11,26 +11,13 @@ function initBody() {
 
 function mute() {
     if (!sound) {
-        music.pause();
-        sound = true;
+        this.music.pause();
+        this.sound = true;
         document.getElementById('change-speaker').style.backgroundImage = "url('img/mute.png')";
-    } else {
-        music.play();
-        sound = false;
+    } else if (sound) {
+        this.music.play();
+        this.sound = false;
         document.getElementById('change-speaker').style.backgroundImage = "url('img/audio.png')";
-    }
-}
-
-function goFullscreen() {
-    const canvas = document.getElementById('canvas');
-    if (canvas.requestFullscreen) {
-        canvas.requestFullscreen();
-    } else if (canvas.mozRequestFullScreen) { // Firefox
-        canvas.mozRequestFullScreen();
-    } else if (canvas.webkitRequestFullscreen) { // Chrome, Safari, and Opera
-        canvas.webkitRequestFullscreen();
-    } else if (canvas.msRequestFullscreen) { // IE/Edge
-        canvas.msRequestFullscreen();
     }
 }
 
@@ -40,9 +27,5 @@ function initGame() {
     startGame();
     initLevel();
     world = new World(canvas, keyboard);
-    music.play();
-    goFullscreen(); // Vollbild aktivieren
+    this.music.play();
 }
-
-// Event Listener für den "Play"-Button
-document.getElementById('play-button').addEventListener('click', initGame);
