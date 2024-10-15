@@ -46,14 +46,18 @@ class World {
 
     run() {
         setInterval(() => {
-            this.checkCollisions();
             this.checkThrowObjects();
             this.collectingCoins();
             this.collectingBottles();
             this.catchedByBoss();
             this.bossFollowCharacter();
         }, 50);
+    
+        setInterval(() => {
+            this.checkCollisions();
+        }, 200);
     }
+    
 
     /**
      * Checks if throwable objects are thrown.
