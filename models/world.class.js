@@ -105,8 +105,15 @@ class World {
      */
 
     characterJumpToKill(enemy) {
-        return this.character.isColliding(enemy) && this.character.isAboveGround();
+        if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
+            if (!sound) {
+                this.hurt_sound.play();
+            }
+            return true;
+        }
+        return false;
     }
+    
 
     /**
      * @param {string} enemy - One of all enemies.
@@ -287,11 +294,11 @@ class World {
 
         mo.draw(this.ctx);
 
-        // this.ctx.beginPath();
-        // this.ctx.lineWidth = "6";
-        // this.ctx.strokeStyle = "red";
-        // this.ctx.rect(mo.x, mo.y, mo.width, mo.height);
-        // this.ctx.stroke();
+        this.ctx.beginPath();
+        this.ctx.lineWidth = "6";
+        this.ctx.strokeStyle = "red";
+        this.ctx.rect(mo.x, mo.y, mo.width, mo.height);
+        this.ctx.stroke();
 
 
         if (mo.otherDirection) {
