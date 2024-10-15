@@ -51,8 +51,9 @@ class World {
             this.collectingBottles();
             this.catchedByBoss();
             this.bossFollowCharacter();
+            this.attackEndboss(); 
         }, 50);
-    
+
         setInterval(() => {
             this.checkCollisions();
         }, 200);
@@ -68,7 +69,6 @@ class World {
             this.character.lastMove = 0;
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.otherDirection);
             this.throwableObjects.push(bottle);
-            this.attackEndboss();
             this.attackChickenWithBottle();
             this.character.amountOfBottle--;
             this.bottleBar.setPercantage(this.character.amountOfBottle * 10);
@@ -80,6 +80,7 @@ class World {
                 this.oneMoreShot = false;
             }, 900);
         }
+        this.attackEndboss();
     }
 
     /**
@@ -95,14 +96,15 @@ class World {
                 }
             } else {
                 this.level.endboss.forEach(endboss => {
-                    if (this.characterCollidingWithEnemies(enemy, endboss)) {
+                    if (this.characterCollidingWithEnemies(enemy, endboss) && !this.character.isAboveGround()) {
                         this.characterGetsHurt();
                     }
                 });
             }
         });
     }
-
+    
+    
     /**
      * @param {string} enemy - One of all enemies.
      * @returns If character jumps to kill enemy.
@@ -126,8 +128,12 @@ class World {
      */
 
     characterCollidingWithEnemies(enemy, endboss) {
-        return this.character.isColliding(enemy) && enemy.energy > 0 || this.character.isColliding(endboss);
+        const isCharacterOnGround = this.character.isAboveGround() === false;
+    
+        return (isCharacterOnGround && this.character.isColliding(enemy) && enemy.energy > 0) || 
+               (isCharacterOnGround && this.character.isColliding(endboss));
     }
+    
 
     /**
      * When character gets hurt.
@@ -160,9 +166,8 @@ class World {
     attackEndboss() {
         this.throwableObjects.forEach(bottle => {
             this.level.endboss.forEach(endboss => {
-                let distance = Math.abs(bottle.x - endboss.x);
 
-                if (bottle.isColliding(endboss) || distance <= 200)
+                if (bottle.isColliding(endboss))
                     this.endbossGetsHurt(bottle, endboss);
             });
         });

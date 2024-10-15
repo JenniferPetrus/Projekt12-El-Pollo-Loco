@@ -410,9 +410,12 @@ th{
     }
 }
 
-
 @media (hover: none) and (orientation: landscape){
     #mobile-keyboard {
         display: flex;
+    }
+    #canvas{
+        height: 100%;
+        width: 100%;
     }
 }
