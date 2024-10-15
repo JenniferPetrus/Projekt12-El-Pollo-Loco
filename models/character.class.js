@@ -82,12 +82,12 @@ class Character extends MovableObject {
      */
 
     constructor() {
-        super().loadImage('img/2_character_pepe/2_walk/W-21.png')
+        super().loadImage(this.IMAGES_INACTIVE[0]);
+        this.loadImages(this.IMAGES_INACTIVE);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
-        this.loadImages(this.IMAGES_INACTIVE);
         this.loadImages(this.IMAGES_SLEEP);
         this.applyGravity();
         this.animate();
@@ -222,7 +222,7 @@ class Character extends MovableObject {
             if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT && !this.world.keyboard.SPACE && !this.world.keyboard.D) {
                 this.lastMove++;
             }
-        }, 1000);
+        }, 50);
     }
 
     /**
@@ -241,7 +241,7 @@ class Character extends MovableObject {
                     this.snoring_sound.pause();
                 }
             }
-        }, 1000);
+        }, 2000);
     }
 
     /**
