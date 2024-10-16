@@ -96,7 +96,7 @@ class World {
                 }
             } else {
                 this.level.endboss.forEach(endboss => {
-                    if (this.characterCollidingWithEnemies(enemy, endboss) && !this.character.isAboveGround()) {
+                    if (this.characterCollidingWithEnemies(enemy, endboss)) {
                         this.characterGetsHurt();
                     }
                 });
@@ -104,14 +104,13 @@ class World {
         });
     }
     
-    
     /**
      * @param {string} enemy - One of all enemies.
      * @returns If character jumps to kill enemy.
      */
 
     characterJumpToKill(enemy) {
-        if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
+        if (this.character.isColliding(enemy) && this.character.speedY < 0) {
             if (!sound) {
                 this.hurt_sound.play();
             }
@@ -119,7 +118,6 @@ class World {
         }
         return false;
     }
-    
 
     /**
      * @param {string} enemy - One of all enemies.
@@ -129,12 +127,13 @@ class World {
 
     characterCollidingWithEnemies(enemy, endboss) {
         const isCharacterOnGround = this.character.isAboveGround() === false;
-    
-        return (isCharacterOnGround && this.character.isColliding(enemy) && enemy.energy > 0) || 
-               (isCharacterOnGround && this.character.isColliding(endboss));
+        if (isCharacterOnGround) {
+            return this.character.isColliding(enemy) && enemy.energy > 0 || 
+                   this.character.isColliding(endboss);
+        }
+        return false;
     }
     
-
     /**
      * When character gets hurt.
      */
@@ -303,11 +302,14 @@ class World {
 
         mo.draw(this.ctx);
 
-        this.ctx.beginPath();
-        this.ctx.lineWidth = "6";
-        this.ctx.strokeStyle = "red";
-        this.ctx.rect(mo.x, mo.y, mo.width, mo.height);
-        this.ctx.stroke();
+
+        // See items in rect()
+        
+        // this.ctx.beginPath();
+        // this.ctx.lineWidth = "6";
+        // this.ctx.strokeStyle = "red";
+        // this.ctx.rect(mo.x, mo.y, mo.width, mo.height);
+        // this.ctx.stroke();
 
 
         if (mo.otherDirection) {
