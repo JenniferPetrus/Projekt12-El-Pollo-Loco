@@ -20,7 +20,7 @@ class Chicks extends MovableObject {
 
     isSplicable = false;
     deadSound = false;
-    chick_sound = new Audio('audio/chick.mp3');
+    chick_sound = new Audio('audio/chicken.mp3');
 
     /**
      * Sets all start conditions for the object.
@@ -106,8 +106,9 @@ class Chicks extends MovableObject {
     /**
      * Chicks walking.
      */
-    
+
     chickIsWalking() {
         this.playAnimation(this.IMAGES_WALKING);
     }
+
 }

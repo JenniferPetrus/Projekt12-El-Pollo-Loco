@@ -46,19 +46,14 @@ class World {
 
     run() {
         setInterval(() => {
+            this.checkCollisions();
             this.checkThrowObjects();
             this.collectingCoins();
             this.collectingBottles();
             this.catchedByBoss();
             this.bossFollowCharacter();
-            this.attackEndboss(); 
-        }, 50);
-
-        setInterval(() => {
-            this.checkCollisions();
         }, 200);
     }
-    
 
     /**
      * Checks if throwable objects are thrown.
@@ -69,6 +64,7 @@ class World {
             this.character.lastMove = 0;
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.otherDirection);
             this.throwableObjects.push(bottle);
+            this.attackEndboss();
             this.attackChickenWithBottle();
             this.character.amountOfBottle--;
             this.bottleBar.setPercantage(this.character.amountOfBottle * 10);
@@ -80,8 +76,8 @@ class World {
                 this.oneMoreShot = false;
             }, 900);
         }
-        this.attackEndboss();
     }
+
 
     /**
      * Checks collisions between character and enemies or endboss.
@@ -89,34 +85,27 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy, i) => {
-            if (this.characterJumpToKill(enemy)) {
-                enemy.lost();
-                if (enemy.isSplicable) {
-                    this.level.enemies.splice(i, 1);
-                }
-            } else {
-                this.level.endboss.forEach(endboss => {
+            this.level.endboss.forEach(endboss => {
+                if (this.characterJumpToKill(enemy)) {
+                    enemy.lost();
+                } else
                     if (this.characterCollidingWithEnemies(enemy, endboss)) {
                         this.characterGetsHurt();
                     }
-                });
-            }
+                if (enemy.isSplicable) {
+                    this.level.enemies.splice(i, 1);
+                }
+            });
         });
     }
-    
+
     /**
      * @param {string} enemy - One of all enemies.
      * @returns If character jumps to kill enemy.
      */
 
     characterJumpToKill(enemy) {
-        if (this.character.isColliding(enemy) && this.character.speedY < 0) {
-            if (!sound) {
-                this.hurt_sound.play();
-            }
-            return true;
-        }
-        return false;
+        return this.character.isColliding(enemy) && this.character.isAbovGround();
     }
 
     /**
@@ -126,14 +115,9 @@ class World {
      */
 
     characterCollidingWithEnemies(enemy, endboss) {
-        const isCharacterOnGround = this.character.isAboveGround() === false;
-        if (isCharacterOnGround) {
-            return this.character.isColliding(enemy) && enemy.energy > 0 || 
-                   this.character.isColliding(endboss);
-        }
-        return false;
+        return this.character.isColliding(enemy) && enemy.energy > 0 || this.character.isColliding(endboss);
     }
-    
+
     /**
      * When character gets hurt.
      */
@@ -165,13 +149,14 @@ class World {
     attackEndboss() {
         this.throwableObjects.forEach(bottle => {
             this.level.endboss.forEach(endboss => {
+                let distance = Math.abs(bottle.x - endboss.x);
 
-                if (bottle.isColliding(endboss))
+                if (bottle.isColliding(endboss) || distance <= 200)
                     this.endbossGetsHurt(bottle, endboss);
             });
         });
     }
-
+        
     /**
      * When endboss gets hurt.
      */
@@ -188,7 +173,7 @@ class World {
     /**
      * When endboss follows character to attack him.
      */
-
+    
     bossFollowCharacter() {
         let endboss = this.level.endboss[0]
         if (this.character.x > endboss.x + endboss.width) {
@@ -257,11 +242,13 @@ class World {
         this.addObjectsToMap(this.level.backgrounds);
         this.addObjectsToMap(this.level.clouds);
         this.ctx.translate(-this.camera_x, 0);
+        // ---- Space for fixed Objects ---- //
         this.addToMap(this.statusBar);
         this.addToMap(this.coinBar);
         this.addToMap(this.bottleBar);
         this.addToMap(this.enemieBar);
         this.ctx.translate(this.camera_x, 0);
+
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottles);
@@ -269,7 +256,6 @@ class World {
         this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.throwableObjects);
         this.ctx.translate(-this.camera_x, 0);
-        
 
         let self = this;
         requestAnimationFrame(function () {
@@ -301,16 +287,6 @@ class World {
         }
 
         mo.draw(this.ctx);
-
-
-        // See items in rect()
-        
-        // this.ctx.beginPath();
-        // this.ctx.lineWidth = "6";
-        // this.ctx.strokeStyle = "red";
-        // this.ctx.rect(mo.x, mo.y, mo.width, mo.height);
-        // this.ctx.stroke();
-
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);

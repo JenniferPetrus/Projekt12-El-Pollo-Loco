@@ -342,15 +342,6 @@ th{
     right: 10vw;
 }
 
-@media (max-width: 1024px) and (orientation: landscape) {
-    .only-mobile {
-        display: flex;
-    }
-    .only-desktop {
-        display: none;
-    }
-}
-
 @media only screen and (max-width: 500px) {
     .rotate {
         display: block;
@@ -366,56 +357,78 @@ th{
     }
 }
 
+@media (max-width: 1024px) and (orientation: landscape) {
+    #mobile-keyboard {
+        display: flex;
+    }
+
+    .only-mobile {
+        display: flex;
+    }
+
+    .only-desktop {
+        display: none;
+    }
+}
+
+
+@media only screen and (max-width: 500px) {
+    .rotate {
+        display: block;
+    }
+
+    #fullscreen {
+        display: none;
+    }
+}
+
 
 @media only screen and (max-height: 600px) {
     h1 {
         display: none;
     }
-    #mobile-keyboard {
-        display: flex;
-    }
+
     .play-btn {
         padding: 8px 24px;
         font-size: 24px;
     }
+
     canvas {
         height: 64vh !important;
         width: 56vw;
+
     }
+
     .responsive {
         height: 64vh !important;
         width: 56vw;
     }
+
+
     .height .width {
         display: none;
     }
+
     footer {
         height: 10vh;
         width: 100%;
         padding: 0;
-        gap: 130px;
     }
+
+    .fullscreen {
+        display: none;
+    }
+
     .section-manage {
-        display: none;
+        height: 40vh;
+        width: 32vw;
     }
-    #gaming{
-        display: none;
-    }
+
     table {
         font-size: 21px;
 
         img {
             width: 32px !important;
         }
-    }
-}
-
-@media (hover: none) and (orientation: landscape){
-    #mobile-keyboard {
-        display: flex;
-    }
-    #canvas{
-        height: 100%;
-        width: 100%;
     }
 }

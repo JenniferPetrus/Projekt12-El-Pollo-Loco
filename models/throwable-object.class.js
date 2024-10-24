@@ -1,4 +1,5 @@
 class ThrowableObject extends MovableObject {
+
     IMAGES_THROW = [
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
         'img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
@@ -18,7 +19,7 @@ class ThrowableObject extends MovableObject {
     broken = false;
     hideAttack = false;
 
-    /**
+        /**
      * Constructor for ThrowableObject class.
      * @param {number} x - is the start coordinate from the image.
      * @param {number} y - is the start coordinate from the image.

@@ -73,7 +73,7 @@ class Character extends MovableObject {
 
     walking_sound = new Audio('audio/walking.mp3');
     jumping_sound = new Audio('audio/jump.mp3');
-    throwing_sound = new Audio('audio/throw.mp3');
+    throwing_sound = new Audio('audio/audio_throw.mp3');
     loosing_sound = new Audio('audio/game-over-sound.mp3');
     snoring_sound = new Audio('audio/snore.mp3');
 
@@ -82,12 +82,12 @@ class Character extends MovableObject {
      */
 
     constructor() {
-        super().loadImage(this.IMAGES_INACTIVE[0]);
-        this.loadImages(this.IMAGES_INACTIVE);
+        super().loadImage('img/2_character_pepe/2_walk/W-21.png')
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_INACTIVE);
         this.loadImages(this.IMAGES_SLEEP);
         this.applyGravity();
         this.animate();
@@ -139,7 +139,7 @@ class Character extends MovableObject {
         this.snoring_sound.pause();
         this.otherDirection = false;
         this.lastMove = 0;
-        if (!sound && !this.isAboveGround()) {
+        if (!sound && !this.isAbovGround()) {
             this.walking_sound.play();
         }
     }
@@ -162,7 +162,7 @@ class Character extends MovableObject {
         this.snoring_sound.pause();
         this.otherDirection = true;
         this.lastMove = 0;
-        if (!sound && !this.isAboveGround()) {
+        if (!sound && !this.isAbovGround()) {
             this.walking_sound.play();
         }
     }
@@ -173,7 +173,7 @@ class Character extends MovableObject {
      */
 
     canJump() {
-        return this.world.keyboard.SPACE && !this.isAboveGround();
+        return this.world.keyboard.SPACE && !this.isAbovGround();
     }
 
     /**
@@ -208,7 +208,7 @@ class Character extends MovableObject {
      */
 
     jumpCharacter() {
-        if (this.isAboveGround()) {
+        if (this.isAbovGround()) {
             this.playAnimation(this.IMAGES_JUMPING);
         }
     }
@@ -222,7 +222,7 @@ class Character extends MovableObject {
             if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT && !this.world.keyboard.SPACE && !this.world.keyboard.D) {
                 this.lastMove++;
             }
-        }, 50);
+        }, 1000);
     }
 
     /**
@@ -241,7 +241,7 @@ class Character extends MovableObject {
                     this.snoring_sound.pause();
                 }
             }
-        }, 2000);
+        }, 1000);
     }
 
     /**

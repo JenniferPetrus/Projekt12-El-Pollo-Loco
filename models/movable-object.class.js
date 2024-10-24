@@ -1,5 +1,6 @@
 class MovableObject extends DrawableObject {
-    speed = 0.25;
+
+    speed = 0.15;
     otherDirection = false;
     speedY = 0;
     acceleration = 2.5;
@@ -25,20 +26,19 @@ class MovableObject extends DrawableObject {
 
     applyGravity() {
         setInterval(() => {
-            if (this.isAboveGround() || this.speedY > 0) {
+            if (this.isAbovGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
         }, 1000 / 25);
     }
-
     /**     
      * @returns true or false.
      * Checks the start position in y against the is position and
      * ensures that thrown objects simply fall.
      */
 
-    isAboveGround() {
+    isAbovGround() {
         if (this instanceof ThrowableObject) {
             return true
         } else {
@@ -73,6 +73,7 @@ class MovableObject extends DrawableObject {
 
     collectBottle() {
         this.amountOfBottle += 1;
+
     }
 
     /**
@@ -137,7 +138,6 @@ class MovableObject extends DrawableObject {
     isDead() {
         return this.energy == 0;
     }
-
     /**
      * Loads different images in the img value,
      * to animate the figures movements.
@@ -166,6 +166,7 @@ class MovableObject extends DrawableObject {
 
     moveLeft() {
         this.x -= this.speed;
+
     }
 
     /**
@@ -175,4 +176,5 @@ class MovableObject extends DrawableObject {
     jump() {
         this.speedY = 30;
     }
+
 }

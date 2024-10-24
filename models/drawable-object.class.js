@@ -12,12 +12,11 @@ class DrawableObject {
      * Load image of objects.
      */
     
-    
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
     }
-
+    
     /**
      * @param {string} ctx - Image of object 
      * Draw the image in canvas.
@@ -31,14 +30,13 @@ class DrawableObject {
     * @param {Array} arr - Array with many Images path.
     * Load images of the objects.
     */
-   
+
     loadImages(arr) {
         arr.forEach((path) => {
             let img = new Image();
             img.src = path;
             this.imageCache[path] = img;
         });
-        
 
     }
 }

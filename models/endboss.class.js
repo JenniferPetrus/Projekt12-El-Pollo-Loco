@@ -43,9 +43,10 @@ class Endboss extends MovableObject {
     offset = {
         top: 20,
         bottom: 40,
-        left: 70,
-        right: 60,
+        left: 40,
+        right: 40,
     };
+
 
     hadFirstContact = false;
 
@@ -61,7 +62,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.x = 2500;
-        this.speed = 0.35
+        this.speed = 1.35;
         this.animate();
     }
 
@@ -114,6 +115,7 @@ class Endboss extends MovableObject {
      */
 
     endbossRaiseAlarm(i) {
+
         if (i < 4) {
             this.playAnimation(this.IMAGES_ALERT);
         } if (i > 5) {
@@ -142,7 +144,7 @@ class Endboss extends MovableObject {
         }, 1000);
     }
 
-    /**
+        /**
      * @param {number} i - Counter.
      * Endboss goes wild.
      */
