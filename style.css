@@ -324,22 +324,22 @@ th{
 
 .console {
     position: absolute;
-    top: 60%;
+    top: 50%;
     background-color: #ffc265de;
     border-radius: 10%;
 }
 
 .top {
-    top: 60vh;
+    top: 50vh;
     height: 10vh;
 }
 
 .left {
-    left: 10vw;
+    left: 5vw;
 }
 
 .right {
-    right: 10vw;
+    right: 5vw;
 }
 
 @media only screen and (max-width: 500px) {
@@ -357,7 +357,7 @@ th{
     }
 }
 
-@media (max-width: 1024px) and (orientation: landscape) {
+@media (max-width: 1367px) and (orientation: landscape) {
     #mobile-keyboard {
         display: flex;
     }

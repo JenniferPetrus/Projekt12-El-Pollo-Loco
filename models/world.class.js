@@ -17,6 +17,9 @@ class World {
     bottle_sound = new Audio('audio/bottle.mp3')
     boss_sound = new Audio('audio/bossChick.mp3');
 
+    lastHurtTime = 0;
+    hurtDelay = 1000;
+
     /**
      * Creates an instance of World.
      * @param {HTMLCanvasElement} canvas - Canvas element.
@@ -123,11 +126,15 @@ class World {
      */
 
     characterGetsHurt() {
-        this.character.hit();
-        if (!sound) {
-            this.hurt_sound.play();
+        const currentTime = Date.now();
+        if (currentTime - this.lastHurtTime >= this.hurtDelay) {
+            this.character.hit();
+            this.lastHurtTime = currentTime;
+            if (!sound) {
+                this.hurt_sound.play();
+            }
+            this.statusBar.setPercantage(this.character.energy);
         }
-        this.statusBar.setPercantage(this.character.energy);
     }
 
     /**
