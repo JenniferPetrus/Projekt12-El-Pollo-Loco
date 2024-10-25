@@ -52,7 +52,7 @@ class World {
             this.collectingBottles();
             this.catchedByBoss();
             this.bossFollowCharacter();
-        }, 200);
+        }, 50);
     }
 
     /**
@@ -86,7 +86,7 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy, i) => {
             this.level.endboss.forEach(endboss => {
-                if (this.characterJumpToKill(enemy)) {
+                if (this.characterJumpToKill(enemy) && this.character.speedY < 0) {
                     enemy.lost();
                 } else
                     if (this.characterCollidingWithEnemies(enemy, endboss)) {

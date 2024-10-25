@@ -1,5 +1,4 @@
 class MovableObject extends DrawableObject {
-
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
@@ -138,6 +137,7 @@ class MovableObject extends DrawableObject {
     isDead() {
         return this.energy == 0;
     }
+    
     /**
      * Loads different images in the img value,
      * to animate the figures movements.
