@@ -55,7 +55,7 @@ class World {
             this.collectingBottles();
             this.catchedByBoss();
             this.bossFollowCharacter();
-        }, 50);
+        }, 30);
     }
 
     /**
