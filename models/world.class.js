@@ -129,6 +129,8 @@ class World {
         const currentTime = Date.now();
         if (currentTime - this.lastHurtTime >= this.hurtDelay) {
             this.character.hit();
+            this.character.lastMove = 0;
+            this.character.snoring_sound.pause();
             this.lastHurtTime = currentTime;
             if (!sound) {
                 this.hurt_sound.play();
